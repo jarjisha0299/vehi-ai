@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Sparkles, Loader2, Image, Mic, MicOff, Moon, Sun, Copy, Download, Trash2, LogOut } from 'lucide-react';
+import { Send, Sparkles, Loader2, Moon, Sun, Trash2, LogOut } from 'lucide-react';
 import { useAuth } from '../utils/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
