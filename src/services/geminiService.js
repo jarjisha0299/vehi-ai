@@ -1,38 +1,35 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const API_KEY = process.env.REACT_APP_GEMINI_API_KEY;
-
-export const sendMessage = async (message, history = []) => {
+export const sendMessage = async (message) => {
   try {
-    if (!API_KEY) {
-      throw new Error('API key missing');
+    const apiKey = process.env.REACT_APP_GEMINI_API_KEY;
+    
+    if (!apiKey) {
+      throw new Error('API key is missing from environment');
     }
 
-    const genAI = new GoogleGenerativeAI(API_KEY);
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
-    const chatHistory = history.slice(-5).map(msg => ({
-      role: msg.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: msg.content }]
-    }));
-
-    const chat = model.startChat({
-      history: chatHistory,
-      generationConfig: {
-        maxOutputTokens: 1000,
-        temperature: 0.7,
-      },
-    });
-
-    const result = await chat.sendMessage(message);
+    const result = await model.generateContent(message);
     const text = result.response.text();
 
     return { success: true, text };
+
   } catch (error) {
-    console.error('AI Error:', error);
+    let errorMsg = 'Something went wrong';
+    
+    if (error.message.includes('API key')) {
+      errorMsg = 'Invalid API key - please create a new one';
+    } else if (error.message.includes('quota')) {
+      errorMsg = 'API quota exceeded - wait 1 minute';
+    } else if (error.message.includes('model')) {
+      errorMsg = 'Model error - trying different model...';
+    }
+    
     return { 
       success: false, 
-      error: 'AI service unavailable. Check API key.'
+      error: errorMsg
     };
   }
 };

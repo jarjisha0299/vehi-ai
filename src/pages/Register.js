@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../utils/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { Mail, Lock, User, Loader2, Sparkles, CheckCircle } from 'lucide-react';
 
 function Register() {
   const [name, setName] = useState('');
@@ -54,11 +53,11 @@ function Register() {
           textAlign: 'center',
           boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
         }}>
-          <CheckCircle style={{ width: '64px', height: '64px', color: '#22c55e', margin: '0 auto 20px' }} />
+          <div style={{ fontSize: '64px', marginBottom: '20px' }}>✅</div>
           <h2 style={{ color: '#333', marginBottom: '12px' }}>Check Your Email!</h2>
           <p style={{ color: '#666', marginBottom: '24px' }}>
             We've sent a verification link to <strong>{email}</strong>. 
-            Please check your inbox and click the link to verify your account.
+            Please check your inbox.
           </p>
           <button
             onClick={() => navigate('/login')}
@@ -69,7 +68,8 @@ function Register() {
               border: 'none',
               borderRadius: '8px',
               fontSize: '14px',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              fontWeight: '600'
             }}
           >
             Go to Login
@@ -97,21 +97,9 @@ function Register() {
         boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
       }}>
         <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-          <div style={{
-            width: '60px',
-            height: '60px',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            borderRadius: '12px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: '0 auto 16px'
-          }}>
-            <Sparkles style={{ color: 'white', width: '32px', height: '32px' }} />
-          </div>
-          <h1 style={{ margin: 0, fontSize: '24px', color: '#333' }}>Create Account</h1>
+          <h1 style={{ margin: 0, fontSize: '32px', color: '#333' }}>✨ Vehi AI</h1>
           <p style={{ color: '#666', fontSize: '14px', margin: '8px 0 0' }}>
-            Join Vehi AI today
+            Create your account
           </p>
         </div>
 
@@ -130,100 +118,67 @@ function Register() {
 
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#333' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#333', fontWeight: '500' }}>
               Full Name
             </label>
-            <div style={{ position: 'relative' }}>
-              <User style={{
-                position: 'absolute',
-                left: '12px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                color: '#999',
-                width: '20px',
-                height: '20px'
-              }} />
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="John Doe"
-                required
-                style={{
-                  width: '100%',
-                  padding: '12px 12px 12px 44px',
-                  border: '2px solid #e0e0e0',
-                  borderRadius: '8px',
-                  fontSize: '14px',
-                  boxSizing: 'border-box'
-                }}
-              />
-            </div>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="John Doe"
+              required
+              style={{
+                width: '100%',
+                padding: '12px',
+                border: '2px solid #e0e0e0',
+                borderRadius: '8px',
+                fontSize: '14px',
+                boxSizing: 'border-box'
+              }}
+            />
           </div>
 
           <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#333' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#333', fontWeight: '500' }}>
               Email
             </label>
-            <div style={{ position: 'relative' }}>
-              <Mail style={{
-                position: 'absolute',
-                left: '12px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                color: '#999',
-                width: '20px',
-                height: '20px'
-              }} />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
-                required
-                style={{
-                  width: '100%',
-                  padding: '12px 12px 12px 44px',
-                  border: '2px solid #e0e0e0',
-                  borderRadius: '8px',
-                  fontSize: '14px',
-                  boxSizing: 'border-box'
-                }}
-              />
-            </div>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              required
+              style={{
+                width: '100%',
+                padding: '12px',
+                border: '2px solid #e0e0e0',
+                borderRadius: '8px',
+                fontSize: '14px',
+                boxSizing: 'border-box'
+              }}
+            />
           </div>
 
           <div style={{ marginBottom: '24px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#333' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#333', fontWeight: '500' }}>
               Password
             </label>
-            <div style={{ position: 'relative' }}>
-              <Lock style={{
-                position: 'absolute',
-                left: '12px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                color: '#999',
-                width: '20px',
-                height: '20px'
-              }} />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-                minLength={6}
-                style={{
-                  width: '100%',
-                  padding: '12px 12px 12px 44px',
-                  border: '2px solid #e0e0e0',
-                  borderRadius: '8px',
-                  fontSize: '14px',
-                  boxSizing: 'border-box'
-                }}
-              />
-            </div>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required
+              minLength={6}
+              style={{
+                width: '100%',
+                padding: '12px',
+                border: '2px solid #e0e0e0',
+                borderRadius: '8px',
+                fontSize: '14px',
+                boxSizing: 'border-box'
+              }}
+            />
             <p style={{ fontSize: '12px', color: '#999', marginTop: '6px' }}>
               Minimum 6 characters
             </p>
@@ -241,21 +196,10 @@ function Register() {
               borderRadius: '8px',
               fontSize: '16px',
               fontWeight: '600',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px'
+              cursor: loading ? 'not-allowed' : 'pointer'
             }}
           >
-            {loading ? (
-              <>
-                <Loader2 style={{ width: '20px', height: '20px', animation: 'spin 1s linear infinite' }} />
-                Creating account...
-              </>
-            ) : (
-              'Create Account'
-            )}
+            {loading ? 'Creating account...' : 'Create Account'}
           </button>
         </form>
 
@@ -269,13 +213,6 @@ function Register() {
           </a>
         </p>
       </div>
-
-      <style>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
     </div>
   );
 }
